@@ -18,7 +18,7 @@ public class EvenNumberIdentificationTest {
 
 	@ParameterizedTest
 	@ValueSource(ints = { 0, 2, 166, -254 })
-	void isEven(int number) {
+	void isEven_successfull(int number) {
 		Assertions.assertTrue(evenNumberIdentification.isEven(number));
 	}
 
@@ -39,6 +39,6 @@ public class EvenNumberIdentificationTest {
 		evenNumberIdentification.isEvenAsString(number);
 		final long endTime = System.nanoTime();
 
-		Assertions.assertTimeout(Duration.ofNanos(startTime - endTime), () -> evenNumberIdentification.isEven(number));
+		Assertions.assertTimeout(Duration.ofNanos(endTime - startTime), () -> evenNumberIdentification.isEven(number));
 	}
 }
