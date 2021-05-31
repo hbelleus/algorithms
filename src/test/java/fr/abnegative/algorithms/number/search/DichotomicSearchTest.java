@@ -1,12 +1,18 @@
 package fr.abnegative.algorithms.number.search;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.Stream;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -28,45 +34,41 @@ class DichotomicSearchTest {
 			ints[i] = new Random().nextInt();
 		}
 
+		Arrays.sort(ints);
+
 	}
 
-	@DisplayName("Testing dichotomic search with null value")
-	@ParameterizedTest
-	@ValueSource(ints = { 0 })
-	void searchTest_emptyArray(int value) {
+	@Nested
+	@DisplayName("Testing dichotomic search")
+	@TestInstance(Lifecycle.PER_CLASS)
+	class SearchTest {
 
-		Assertions.assertFalse(dichotomicSearch.search(new int[0], value));
-	}
+		private int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
 
-	@DisplayName("Testing dichotomic search with existing value")
-	@ParameterizedTest
-	@MethodSource
-	void searchTest_success(int[] ints, int value) {
+		@DisplayName("Testing dichotomic search in empty array")
+		@ParameterizedTest
+		@ValueSource(ints = { 0 })
+		void searchTest_emptyArray(int value) {
 
-		Assertions.assertTrue(dichotomicSearch.search(ints, value));
-	}
+			Assertions.assertFalse(dichotomicSearch.search(new int[0], value));
+		}
 
-	public static Stream<Arguments> searchTest_success() {
+		@DisplayName("Testing dichotomic search with existing value")
+		@ParameterizedTest
+		@ValueSource(ints = { 1, 3, 16, 49, 28, 209 })
+		void searchTest_success(int value) {
 
-		int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
+			Assertions.assertTrue(dichotomicSearch.search(ints, value));
+		}
 
-		return Stream.of(Arguments.of(ints, 1), Arguments.of(ints, 3), Arguments.of(ints, 16), Arguments.of(ints, 49),
-				Arguments.of(ints, 28), Arguments.of(ints, 209));
-	}
+		@DisplayName("Testing dichotomic search with non existing value")
+		@ParameterizedTest
+		@ValueSource(ints = { 20, 101, 2000 })
+		void searchTest_notPresent(int value) {
 
-	@DisplayName("Testing dichotomic search with non existing value")
-	@ParameterizedTest
-	@MethodSource
-	void searchTest_notPresent(int[] ints, int value) {
+			Assertions.assertFalse(dichotomicSearch.search(ints, value));
+		}
 
-		Assertions.assertFalse(dichotomicSearch.search(ints, value));
-	}
-
-	public static Stream<Arguments> searchTest_notPresent() {
-
-		int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
-
-		return Stream.of(Arguments.of(ints, 20), Arguments.of(ints, 101), Arguments.of(ints, 2000));
 	}
 
 	@DisplayName("Testing recursive binary search")
@@ -101,8 +103,7 @@ class DichotomicSearchTest {
 		dichotomicSearch.binarySearch(ints, number);
 		final long endTime2 = System.nanoTime();
 
-		Assertions.assertTrue(
-				Duration.ofNanos(endTime - startTime).compareTo(Duration.ofNanos(endTime2 - startTime2)) > 0);
+		MatcherAssert.assertThat((endTime - startTime) > (endTime2 - startTime2), CoreMatchers.is(true));
 	}
 
 }
