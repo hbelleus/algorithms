@@ -11,8 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -26,7 +24,7 @@ class DichotomicSearchTest {
 	@BeforeAll
 	static void generateArray() {
 
-		final var size = 1000000;
+		final var size = 100000000;
 
 		ints = new int[size];
 
@@ -40,7 +38,6 @@ class DichotomicSearchTest {
 
 	@Nested
 	@DisplayName("Testing dichotomic search")
-	@TestInstance(Lifecycle.PER_CLASS)
 	class SearchTest {
 
 		private int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
@@ -83,8 +80,7 @@ class DichotomicSearchTest {
 
 		int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
 
-		return Stream.of(Arguments.of(ints, 1), Arguments.of(ints, 3), Arguments.of(ints, 16), Arguments.of(ints, 49),
-				Arguments.of(ints, 28), Arguments.of(ints, 209));
+		return Stream.of(1, 3, 16, 49, 28, 209).map(value -> Arguments.of(ints, value));
 	}
 
 	@DisplayName("Performance test")

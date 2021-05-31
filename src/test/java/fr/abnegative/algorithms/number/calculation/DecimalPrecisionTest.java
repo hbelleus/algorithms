@@ -68,10 +68,7 @@ class DecimalPrecisionTest {
 
 	static Stream<List<String>> calculate_preciseResult() {
 
-		List<List<String>> values = new ArrayList<>();
-		values.add(List.of("10.45901", "1.01010"));
-
-		return values.stream();
+		return Stream.of(List.of("10.45901", "1.01010"));
 	}
 
 }

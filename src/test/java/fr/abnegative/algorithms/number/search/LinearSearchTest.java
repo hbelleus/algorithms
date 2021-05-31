@@ -25,8 +25,7 @@ class LinearSearchTest {
 
 		int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
 
-		return Stream.of(Arguments.of(ints, 1), Arguments.of(ints, 3), Arguments.of(ints, 16), Arguments.of(ints, 49),
-				Arguments.of(ints, 28), Arguments.of(ints, 209));
+		return Stream.of(1, 3, 16, 49, 28, 209).map(value -> Arguments.of(ints, value));
 	}
 
 	@DisplayName("Test for not found values")
@@ -41,8 +40,7 @@ class LinearSearchTest {
 
 		int[] ints = new int[] { 1, 3, 9, 12, 14, 16, 28, 49, 100, 104, 148, 209 };
 
-		return Stream.of(Arguments.of(ints, 0), Arguments.of(ints, 13), Arguments.of(ints, 149),
-				Arguments.of(ints, 310));
+		return Stream.of(0, 13, 149, 310).map(value -> Arguments.of(ints, value));
 	}
 
 }

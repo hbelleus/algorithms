@@ -1,6 +1,6 @@
 package fr.abnegative.algorithms.number.calculation;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -25,11 +25,11 @@ public class Factorial {
 
 	public String calculatePrecisely(List<String> values) {
 
-		var num = BigDecimal.valueOf(Long.valueOf(values.get(0))); // take argument as command line
-		var result = BigDecimal.valueOf(1);
+		var num = BigInteger.valueOf(Long.valueOf(values.get(0))); // take argument as command line
+		var result = BigInteger.valueOf(1);
 		while (num.intValue() > 0) {
 			result = result.multiply(num);
-			num = num.subtract(BigDecimal.valueOf(1));
+			num = num.subtract(BigInteger.valueOf(1));
 		}
 
 		return String.valueOf(result);
