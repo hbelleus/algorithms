@@ -8,10 +8,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class BubbleSortTest extends SorterFunctionalTest {
+public class MergeSortTest extends SorterFunctionalTest {
 
-	BubbleSortTest() {
-		super(new BubbleSort());
+	MergeSortTest() {
+		super(new MergeSort());
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class BubbleSortTest extends SorterFunctionalTest {
 	@MethodSource
 	public void sortTest_LargeListSize(int[] A) {
 
-		sorter.sort(A);
+		super.sortValidation(A);
 
 		Assertions.assertTimeout(Duration.ofSeconds(2), () -> sorter.sort(A));
 
