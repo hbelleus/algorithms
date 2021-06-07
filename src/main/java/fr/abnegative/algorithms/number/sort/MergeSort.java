@@ -14,7 +14,7 @@ public class MergeSort implements Sorter {
 
 	private void sort(int[] A, int lo, int hi) {
 
-		if (hi - lo == 1)
+		if (hi - lo <= 1)
 			return; // only one element in the array, return.
 		int mid = lo + (hi - lo) / 2; // find middle
 		sort(A, lo, mid); // sort first part
@@ -46,8 +46,7 @@ public class MergeSort implements Sorter {
 				temp[k] = A[j++]; // j is lower or equal to i, so we put it in the array first.
 		}
 		// now we need to copy back temp array to its place in A array
-		for (int k = lo; k < hi; k++)
-			A[k] = temp[k]; // we are copying only the numbers we just merged.
+		System.arraycopy(temp, lo, A, lo, hi - lo);// we are copying only the numbers we just merged.
 
 	}
 
