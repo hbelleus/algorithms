@@ -49,14 +49,4 @@ public class MergeSort implements Sorter {
 		System.arraycopy(temp, lo, A, lo, hi - lo);// we are copying only the numbers we just merged.
 
 	}
-
-	/**
-	 * Just for testing purposes.
-	 */
-	/*
-	 * public static void main(String[] args) { int[] list = { 156, 344, 54, 546,
-	 * 767, 23, 34, 64, 234, 654, 234, 65, 234, 65, 87, 3, 5, 76, 24, 2, 3, 7, 9, 5,
-	 * 34, 32, 4525, 345, 0 }; sort(list); for (int i = 0; i < list.length; i++) {
-	 * System.out.println(list[i]); } }
-	 */
 }

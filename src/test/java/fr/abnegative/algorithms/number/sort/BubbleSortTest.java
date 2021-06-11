@@ -2,7 +2,6 @@ package fr.abnegative.algorithms.number.sort;
 
 import java.time.Duration;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

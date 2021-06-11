@@ -14,7 +14,7 @@ public class HeapSort implements Sorter {
 	 */
 	public void sort(int[] A) {
 		heapSize = new AtomicInteger(A.length); // we need to sort all the list so heapSize == A.length
-		buildMaxHeap(A); // first we build max heap
+		this.buildMaxHeap(A); // first we build max heap
 		// now we have the biggest element in the heap on the top
 		// we will exchange it with the last element in the list
 		// reduce heapSize so this (biggest) element wont be sorted anymore
@@ -33,7 +33,7 @@ public class HeapSort implements Sorter {
 			// reduce the heap size
 			heapSize.decrementAndGet();
 			// find new biggest
-			maxHeapify(A, 0);
+			this.maxHeapify(A, 0);
 		}
 	}
 
@@ -47,14 +47,14 @@ public class HeapSort implements Sorter {
 	 */
 	private void buildMaxHeap(int[] A) {
 		for (int i = A.length / 2 - 1; i >= 0; i--) {
-			maxHeapify(A, i);
+			this.maxHeapify(A, i);
 		}
 	}
 
 	/**
 	 * Takes O(logn) or we can also say that if subtree with root at index i has
 	 * height of h then running time of algorithm is O(h) (note that a binary tree
-	 * with n elements has height = logn) Sorts the array at the given index so that
+	 * with n elements has height = log(n)) Sorts the array at the given index so that
 	 * subtree meets heap requirements.
 	 * 
 	 * @param A array list
@@ -63,22 +63,22 @@ public class HeapSort implements Sorter {
 	 */
 	private void maxHeapify(int[] A, int i) {
 
-		int l = 2 * i; // lets find left child of the given index.
-		int r = 2 * i + 1;// lets find right child of the given index.
+		int left = 2 * i; // lets find left child of the given index.
+		int right = 2 * i + 1;// lets find right child of the given index.
 		int max = i;
 
-		if (l < heapSize.get() && A[l] > A[i]) {
+		if (left < heapSize.get() && A[left] > A[i]) {
 			// lets check if left child is an existing child
 			// if it is an existing child
 			// if left child is bigger than parent
-			max = l; // left child becomes maximum
+			max = left; // left child becomes maximum
 		}
 
-		if (r < heapSize.get() && A[r] > A[max]) {
+		if (right < heapSize.get() && A[right] > A[max]) {
 			// lets check if the right child is an existing child
 			// if it is existing child
 			// if right child is bigger than our current maximum
-			max = r; // right child becomes our new maximum
+			max = right; // right child becomes our new maximum
 		}
 
 		if (max != i) {
